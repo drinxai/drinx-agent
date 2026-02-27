@@ -117,14 +117,14 @@ interface:
     command: npx
     args:
       - -y
-      - "n8n-mcp"
+      - "@czlonkowski/n8n-mcp"
     env:
       MCP_MODE: "stdio"
-      LOG_LEVEL: "error"
+      LOG_LEVEL: "info" # Changed to info to help you debug errors initially
       DISABLE_CONSOLE_OUTPUT: "true"
-      N8N_API_URL: "${N8N_HOST}"
+      N8N_URL: "${N8N_HOST}"  # Standardize on N8N_URL
       N8N_API_KEY: "${N8N_API_KEY}"
-    timeout: 60000
+    timeout: 300000 # Increased to 5 mins (n8n workflows can take a while)
   # MCP Servers configuration example
   # mcpServers:
     # Controls user permissions for MCP (Model Context Protocol) server management
