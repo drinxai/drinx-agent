@@ -27,6 +27,7 @@ cache: true
 
 # Custom interface configuration
 interface:
+  mcpServers: true
   customWelcome: 'Welcome to LibreChat! Enjoy your experience.'
   # Enable/disable file search as a chatarea selection (default: true)
   # Note: This setting does not disable the Agents File Search Capability.
@@ -110,8 +111,7 @@ interface:
   #   use: false
   #   create: false
   #   share: false
-  #   public: false
-  mcpServers: true 
+  #   public: false 
   mcpServers:
   n8n-mcp:
     type: stdio
