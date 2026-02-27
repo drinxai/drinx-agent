@@ -112,13 +112,17 @@ interface:
   #   share: false
   #   public: false
   # MCP Servers configuration example
-  # mcpServers:
+  mcpServers:
     # Controls user permissions for MCP (Model Context Protocol) server management
     # - use: Allow users to use configured MCP servers
     # - create: Allow users to create and manage new MCP servers
     # - share: Allow users to share MCP servers with other users
     # - public: Allow users to share MCP servers publicly (with everyone)
-     
+    use: true
+    create: true
+    share: false
+    public: false
+
     # Creation / edit MCP server config Dialog config example
     # trustCheckbox:
     #   label:
@@ -164,13 +168,13 @@ registration:
 # Note: If balance.enabled is true, transactions will always be enabled
 # regardless of this setting to ensure balance tracking works correctly
 
-# speech:
-#   tts:
-#     openai:
-#       url: ''
-#       apiKey: '${TTS_API_KEY}'
-#       model: ''
-#       voices: ['']
+speech:
+  tts:
+    openai:
+      url: ''
+      apiKey: '${OPENAI_API_KEY}'
+      model: ''
+      voices: ['']
 
 #
 #   stt:
@@ -207,13 +211,27 @@ actions:
 # To allow internal targets like host.docker.internal, you MUST explicitly add them to allowedDomains.
 # Supports wildcards: '*.example.com' matches 'api.example.com', 'staging.example.com', etc.
 # Supports protocol/port restrictions: 'https://api.example.com:8443' restricts to specific protocol/port.
-# mcpSettings:
-#   allowedDomains:
+mcpSettings:
+  allowedDomains:
+    - '${N8N_HOST}'               # n8n instance domain
 #     - 'host.docker.internal'    # Docker host access (required for Docker setups)
 #     - 'localhost'               # Local development
 #     - '*.example.com'           # Wildcard subdomain
 #     - 'https://secure.api.com'  # Protocol-restricted
 #     - 'http://internal:8080'    # Protocol and port restricted
+
+# Instance-level MCP Servers
+mcpServers:
+  n8n-mcp:
+    type: stdio
+    command: npx
+    args:
+      - -y
+      - supergateway
+      - --streamableHttp
+      - '${N8N_HOST}/mcp-server/http'
+      - --header
+      - 'authorization:Bearer ${N8N_API_KEY}'
 
 # Example MCP Servers Object Structure
 # mcpServers:
@@ -574,19 +592,19 @@ endpoints:
 # # https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/assistants_endpoint
 
 # Web Search Configuration (optional)
-# webSearch:
-#   # Jina Reranking Configuration
-#   jinaApiKey: '${JINA_API_KEY}'  # Your Jina API key
-#   jinaApiUrl: '${JINA_API_URL}'  # Custom Jina API URL (optional, defaults to https://api.jina.ai/v1/rerank)
-#   # Other rerankers
-#   cohereApiKey: '${COHERE_API_KEY}'
-#   # Search providers
-#   serperApiKey: '${SERPER_API_KEY}'
-#   searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
-#   searxngApiKey: '${SEARXNG_API_KEY}'
-#   # Content scrapers
-#   firecrawlApiKey: '${FIRECRAWL_API_KEY}'
-#   firecrawlApiUrl: '${FIRECRAWL_API_URL}'
+webSearch:
+  # Jina Reranking Configuration
+  # jinaApiKey: '${JINA_API_KEY}'  # Your Jina API key
+  # jinaApiUrl: '${JINA_API_URL}'  # Custom Jina API URL (optional, defaults to https://api.jina.ai/v1/rerank)
+  # Other rerankers
+  # cohereApiKey: '${COHERE_API_KEY}'
+  # Search providers
+  # serperApiKey: '${SERPER_API_KEY}'
+  searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
+  searxngApiKey: '${SEARXNG_API_KEY}'
+  # Content scrapers
+  # firecrawlApiKey: '${FIRECRAWL_API_KEY}'
+  # firecrawlApiUrl: '${FIRECRAWL_API_URL}'
 
 # Memory configuration for user memories
 # memory:
