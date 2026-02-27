@@ -104,8 +104,6 @@ interface:
   marketplace:
     use: false
   fileCitations: true
-  mcpServers:
-    use: true
   # Remote Agents configuration
   # Controls user permissions for remote agents with external API support
   # remoteAgents:
@@ -166,16 +164,20 @@ registration:
 # Note: If balance.enabled is true, transactions will always be enabled
 # regardless of this setting to ensure balance tracking works correctly
 
-speech:
-  tts:
-    openai:
-      apiKey: '${OPENAI_API_KEY}'
-      model: 'tts-1'
-      voices: ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']
-  stt:
-    openai:
-      apiKey: '${OPENAI_API_KEY}'
-      model: 'whisper-1'
+# speech:
+#   tts:
+#     openai:
+#       url: ''
+#       apiKey: '${TTS_API_KEY}'
+#       model: ''
+#       voices: ['']
+
+#
+#   stt:
+#     openai:
+#       url: ''
+#       apiKey: '${STT_API_KEY}'
+#       model: ''
 
 # rateLimits:
 #   fileUploads:
@@ -214,18 +216,7 @@ actions:
 #     - 'http://internal:8080'    # Protocol and port restricted
 
 # Example MCP Servers Object Structure
-mcpServers:
-  n8n-mcp:
-    type: stdio
-    command: npx
-    args:
-      - "-y"
-      - "n8n-mcp@latest"
-    env:
-      MCP_MODE: "stdio"
-      LOG_LEVEL: "error"
-      DISABLE_CONSOLE_OUTPUT: "true"
-    timeout: 60000
+# mcpServers:
 #   everything:
 #     # type: sse # type can optionally be omitted
 #     url: http://localhost:3001/sse
@@ -583,19 +574,9 @@ endpoints:
 # # https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/assistants_endpoint
 
 # Web Search Configuration (optional)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 132ab0d3 (Comment out empty webSearch YAML block to fix configuration parsing error)
-# webSearch:
-  # The UI will allow you to select SearXNG and enter your Instance URL if these are commented out
-  # searchProvider: "searxng"
-  # searxngInstanceUrl: "${SEARXNG_INSTANCE_URL}"
-=======
 webSearch:
   searchProvider: "searxng"
   searxngInstanceUrl: "${SEARXNG_INSTANCE_URL}"
->>>>>>> f521c544 (Configure SearXNG WebSearch and Google/OpenAI TTS)
 # webSearch:
 #   # Jina Reranking Configuration
 #   jinaApiKey: '${JINA_API_KEY}'  # Your Jina API key
