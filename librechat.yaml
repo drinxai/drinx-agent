@@ -104,13 +104,6 @@ interface:
   marketplace:
     use: false
   fileCitations: true
-  # MCP Servers configuration (NEW)
-  mcpServers:
-    # Controls user permissions for MCP (Model Context Protocol) server management
-    - use: true
-    - create: true
-    - share: false
-    - public: false
   # Remote Agents configuration
   # Controls user permissions for remote agents with external API support
   # remoteAgents:
@@ -178,6 +171,7 @@ registration:
 #       apiKey: '${TTS_API_KEY}'
 #       model: ''
 #       voices: ['']
+
 #
 #   stt:
 #     openai:
@@ -206,7 +200,6 @@ actions:
     - 'swapi.dev'
     - 'librechat.ai'
     - 'google.com'
-    - 'srv995523.hstgr.cloud'
     # - 'http://10.225.26.25:7894'  # Internal IP with protocol/port (uncomment if needed)
 
 # MCP Server domain restrictions for remote transports (SSE, WebSocket, HTTP)
@@ -265,28 +258,22 @@ endpoints:
   #   retrievalModels: ["gpt-4-turbo-preview"]
   #   # (optional) Assistant Capabilities available to all users. Omit the ones you wish to exclude. Defaults to list below.
   #   capabilities: ["code_interpreter", "retrieval", "actions", "tools", "image_vision"]
-  agents:
-    # (optional) Default recursion depth for agents, defaults to 25
-    recursionLimit: 50
-    # (optional) Max recursion depth for agents, defaults to 25
-    maxRecursionLimit: 100
-    # (optional) Disable the builder interface for agents
-    disableBuilder: false
-    # (optional) Maximum total citations to include in agent responses, defaults to 30
-    maxCitations: 30
-    # (optional) Maximum citations per file to include in agent responses, defaults to 7
-    maxCitationsPerFile: 7
-    # (optional) Minimum relevance score for sources to be included in responses, defaults to 0.45 (45% relevance threshold)
-    # Set to 0.0 to show all sources (no filtering), or higher like 0.7 for stricter filtering
-    minRelevanceScore: 0.45
-    # (optional) Agent Capabilities available to all users. Omit the ones you wish to exclude. Defaults to list below.
-    capabilities:
-      - deferred_tools
-      - execute_code
-      - file_search
-      - web_search      # FIXED: Added for web search capability
-      - actions
-      - tools
+  # agents:
+  #   # (optional) Default recursion depth for agents, defaults to 25
+  #   recursionLimit: 50
+  #   # (optional) Max recursion depth for agents, defaults to 25
+  #   maxRecursionLimit: 100
+  #   # (optional) Disable the builder interface for agents
+  #   disableBuilder: false
+  #   # (optional) Maximum total citations to include in agent responses, defaults to 30
+  #   maxCitations: 30
+  #   # (optional) Maximum citations per file to include in agent responses, defaults to 7
+  #   maxCitationsPerFile: 7
+  #   # (optional) Minimum relevance score for sources to be included in responses, defaults to 0.45 (45% relevance threshold)
+  #   # Set to 0.0 to show all sources (no filtering), or higher like 0.7 for stricter filtering
+  #   minRelevanceScore: 0.45
+  #   # (optional) Agent Capabilities available to all users. Omit the ones you wish to exclude. Defaults to list below.
+  #   capabilities: ["deferred_tools", "execute_code", "file_search", "actions", "tools"]
 
   # Anthropic endpoint configuration with Vertex AI support
   # Use this to run Anthropic Claude models through Google Cloud Vertex AI
@@ -586,61 +573,20 @@ endpoints:
 # # See the Custom Configuration Guide for more information on Assistants Config:
 # # https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/assistants_endpoint
 
-# Web Search Configuration (NEW - Enabled)
-webSearch:
-  enabled: true
-  provider: 'serper'
-  serperApiKey: '${SERPER_API_KEY}'
-  searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
-  searxngApiKey: '${SEARXNG_API_KEY}'
-  firecrawlApiKey: '${FIRECRAWL_API_KEY}'
-  firecrawlApiUrl: '${FIRECRAWL_API_URL}'
-  firecrawlVersion: '${FIRECRAWL_VERSION}'
-  scraperProvider: 'firecrawl'
-  jinaApiKey: '${JINA_API_KEY}'
-  jinaApiUrl: '${JINA_API_URL}'
-  cohereApiKey: '${COHERE_API_KEY}'
-  rerankerType: 'jina'
-  scraperTimeout: 7500
-  safeSearch: 1
-
-# Text-to-Speech Configuration (NEW - Enabled)
-speech:
-  tts:
-    openai:
-      url: 'https://api.openai.com/v1/audio/speech'
-      apiKey: '${TTS_API_KEY}'
-      model: 'tts-1'
-      voices: ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']
-  stt:
-    openai:
-      url: 'https://api.openai.com/v1/audio/transcriptions'
-      apiKey: '${STT_API_KEY}'
-      model: 'whisper-1'
-
-# MCP Servers Configuration (NEW - Added n8n MCP)
-mcpServers:
-  allowedDomains:
-    - 'host.docker.internal'
-    - 'localhost'
-    - 'srv995523.hstgr.cloud'
-    - 'n8n.io'
-  servers:
-    n8n:
-      # n8n MCP server configuration
-      # See: https://github.com/czlonkowski/n8n-mcp
-      type: stdio
-      command: npx
-      args:
-        - -y
-        - n8n-mcp
-      env:
-        MCP_MODE: 'stdio'
-        LOG_LEVEL: 'error'
-        DISABLE_CONSOLE_OUTPUT: 'true'
-        N8N_API_URL: 'https://n8n.srv995523.hstgr.cloud/'
-        N8N_API_KEY: '${N8N_API_KEY}'
-      timeout: 60000
+# Web Search Configuration (optional)
+# webSearch:
+#   # Jina Reranking Configuration
+#   jinaApiKey: '${JINA_API_KEY}'  # Your Jina API key
+#   jinaApiUrl: '${JINA_API_URL}'  # Custom Jina API URL (optional, defaults to https://api.jina.ai/v1/rerank)
+#   # Other rerankers
+#   cohereApiKey: '${COHERE_API_KEY}'
+#   # Search providers
+#   serperApiKey: '${SERPER_API_KEY}'
+#   searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
+#   searxngApiKey: '${SEARXNG_API_KEY}'
+#   # Content scrapers
+#   firecrawlApiKey: '${FIRECRAWL_API_KEY}'
+#   firecrawlApiUrl: '${FIRECRAWL_API_URL}'
 
 # Memory configuration for user memories
 # memory:
