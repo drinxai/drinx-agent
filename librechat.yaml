@@ -27,7 +27,6 @@ cache: true
 
 # Custom interface configuration
 interface:
-  mcpServers: true
   customWelcome: 'Welcome to LibreChat! Enjoy your experience.'
   # Enable/disable file search as a chatarea selection (default: true)
   # Note: This setting does not disable the Agents File Search Capability.
@@ -105,6 +104,7 @@ interface:
   marketplace:
     use: false
   fileCitations: true
+  mcpServers: true
   # Remote Agents configuration
   # Controls user permissions for remote agents with external API support
   # remoteAgents:
@@ -113,19 +113,19 @@ interface:
   #   share: false
   #   public: false 
   mcpServers:
-  n8n-mcp:
-    type: stdio
-    command: npx
-    args:
-      - -y
-      - "@czlonkowski/n8n-mcp"
-    env:
-      MCP_MODE: "stdio"
-      LOG_LEVEL: "info" # Changed to info to help you debug errors initially
-      DISABLE_CONSOLE_OUTPUT: "true"
-      N8N_URL: "${N8N_HOST}"  # Standardize on N8N_URL
-      N8N_API_KEY: "${N8N_API_KEY}"
-    timeout: 300000 # Increased to 5 mins (n8n workflows can take a while)
+    n8n-mcp:
+      type: stdio
+      command: npx
+      args:
+        - -y
+        - "@czlonkowski/n8n-mcp"
+      env:
+        MCP_MODE: "stdio"
+        LOG_LEVEL: "info" # Changed to info to help you debug errors initially
+        DISABLE_CONSOLE_OUTPUT: "true"
+        N8N_URL: "${N8N_HOST}"  # Standardize on N8N_URL
+        N8N_API_KEY: "${N8N_API_KEY}"
+      timeout: 300000 # Increased to 5 mins (n8n workflows can take a while)
   # MCP Servers configuration example
   # mcpServers:
     # Controls user permissions for MCP (Model Context Protocol) server management
