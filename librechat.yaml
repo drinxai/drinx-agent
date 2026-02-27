@@ -170,20 +170,12 @@ speech:
   tts:
     openai:
       apiKey: '${OPENAI_API_KEY}'
-<<<<<<< HEAD
       model: 'tts-1'
       voices: ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']
   stt:
     openai:
       apiKey: '${OPENAI_API_KEY}'
       model: 'whisper-1'
-=======
-    google:
-      apiKey: '${GOOGLE_KEY}'
-  stt:
-    openai:
-      apiKey: '${OPENAI_API_KEY}'
->>>>>>> f521c544 (Configure SearXNG WebSearch and Google/OpenAI TTS)
 
 # rateLimits:
 #   fileUploads:
@@ -233,12 +225,7 @@ mcpServers:
       MCP_MODE: "stdio"
       LOG_LEVEL: "error"
       DISABLE_CONSOLE_OUTPUT: "true"
-<<<<<<< HEAD
     timeout: 60000
-=======
-      N8N_API_URL: "${N8N_API_URL}"
-      N8N_API_KEY: "${N8N_API_KEY}"
->>>>>>> f521c544 (Configure SearXNG WebSearch and Google/OpenAI TTS)
 #   everything:
 #     # type: sse # type can optionally be omitted
 #     url: http://localhost:3001/sse
@@ -597,6 +584,9 @@ endpoints:
 
 # Web Search Configuration (optional)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 132ab0d3 (Comment out empty webSearch YAML block to fix configuration parsing error)
 # webSearch:
   # The UI will allow you to select SearXNG and enter your Instance URL if these are commented out
   # searchProvider: "searxng"
