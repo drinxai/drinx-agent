@@ -225,6 +225,7 @@ mcpServers:
       MCP_MODE: "stdio"
       LOG_LEVEL: "error"
       DISABLE_CONSOLE_OUTPUT: "true"
+    timeout: 60000
 #   everything:
 #     # type: sse # type can optionally be omitted
 #     url: http://localhost:3001/sse
