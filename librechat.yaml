@@ -678,7 +678,7 @@ memory:
     # Option 1: Use existing agent by ID
     # id: "your-memory-agent-id"
     # Option 2: Define agent inline
-    provider: "openai"
+    provider: "openAI"
     model: "gpt-4o-mini"
     instructions: "You are a memory management assistant. Store and manage user information accurately."
     model_parameters:
