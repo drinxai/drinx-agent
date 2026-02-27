@@ -166,20 +166,15 @@ registration:
 # Note: If balance.enabled is true, transactions will always be enabled
 # regardless of this setting to ensure balance tracking works correctly
 
-# speech:
-#   tts:
-#     openai:
-#       url: ''
-#       apiKey: '${TTS_API_KEY}'
-#       model: ''
-#       voices: ['']
-
-#
-#   stt:
-#     openai:
-#       url: ''
-#       apiKey: '${STT_API_KEY}'
-#       model: ''
+speech:
+  tts:
+    openai:
+      apiKey: '${OPENAI_API_KEY}'
+    google:
+      apiKey: '${GOOGLE_KEY}'
+  stt:
+    openai:
+      apiKey: '${OPENAI_API_KEY}'
 
 # rateLimits:
 #   fileUploads:
@@ -589,7 +584,8 @@ endpoints:
 
 # Web Search Configuration (optional)
 webSearch:
-  searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
+  searchProvider: "searxng"
+  searxngInstanceUrl: "${SEARXNG_INSTANCE_URL}"
 # webSearch:
 #   # Jina Reranking Configuration
 #   jinaApiKey: '${JINA_API_KEY}'  # Your Jina API key
