@@ -104,6 +104,8 @@ interface:
   marketplace:
     use: false
   fileCitations: true
+  mcpServers:
+    use: true
   # Remote Agents configuration
   # Controls user permissions for remote agents with external API support
   # remoteAgents:
@@ -216,7 +218,19 @@ actions:
 #     - 'http://internal:8080'    # Protocol and port restricted
 
 # Example MCP Servers Object Structure
-# mcpServers:
+mcpServers:
+  n8n-mcp:
+    type: stdio
+    command: npx
+    args:
+      - "-y"
+      - "n8n-mcp@latest"
+    env:
+      MCP_MODE: "stdio"
+      LOG_LEVEL: "error"
+      DISABLE_CONSOLE_OUTPUT: "true"
+      N8N_API_URL: "${N8N_API_URL}"
+      N8N_API_KEY: "${N8N_API_KEY}"
 #   everything:
 #     # type: sse # type can optionally be omitted
 #     url: http://localhost:3001/sse
@@ -574,6 +588,8 @@ endpoints:
 # # https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/assistants_endpoint
 
 # Web Search Configuration (optional)
+webSearch:
+  searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
 # webSearch:
 #   # Jina Reranking Configuration
 #   jinaApiKey: '${JINA_API_KEY}'  # Your Jina API key
