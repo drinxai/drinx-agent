@@ -112,20 +112,7 @@ interface:
   #   create: false
   #   share: false
   #   public: false 
-  mcpServers:
-  n8n-mcp:
-    type: stdio
-    command: npx
-    args:
-      - -y
-      - "@czlonkowski/n8n-mcp"
-    env:
-      MCP_MODE: "stdio"
-      LOG_LEVEL: "info"
-      DISABLE_CONSOLE_OUTPUT: "true"
-      N8N_URL: "${N8N_HOST}"
-      N8N_API_KEY: "${N8N_API_KEY}"
-    timeout: 300000
+
   # MCP Servers configuration example
   # mcpServers:
     # Controls user permissions for MCP (Model Context Protocol) server management
@@ -133,7 +120,7 @@ interface:
     # - create: Allow users to create and manage new MCP servers
     # - share: Allow users to share MCP servers with other users
     # - public: Allow users to share MCP servers publicly (with everyone)
-     
+      
     # Creation / edit MCP server config Dialog config example
     # trustCheckbox:
     #   label:
@@ -258,6 +245,21 @@ actions:
 #       - "mcp-obsidian"
 #       - /path/to/obsidian/vault
 
+mcpServers:
+  n8n-mcp:
+    type: stdio
+    command: npx
+    args:
+      - -y
+      - "@czlonkowski/n8n-mcp"
+    env:
+      MCP_MODE: "stdio"
+      LOG_LEVEL: "info"
+      DISABLE_CONSOLE_OUTPUT: "true"
+      N8N_URL: "${N8N_HOST}"
+      N8N_API_KEY: "${N8N_API_KEY}"
+    timeout: 300000
+
 # Definition of custom endpoints
 endpoints:
   # assistants:
@@ -273,22 +275,23 @@ endpoints:
   #   retrievalModels: ["gpt-4-turbo-preview"]
   #   # (optional) Assistant Capabilities available to all users. Omit the ones you wish to exclude. Defaults to list below.
   #   capabilities: ["code_interpreter", "retrieval", "actions", "tools", "image_vision"]
-  # agents:
-  #   # (optional) Default recursion depth for agents, defaults to 25
-  #   recursionLimit: 50
-  #   # (optional) Max recursion depth for agents, defaults to 25
-  #   maxRecursionLimit: 100
-  #   # (optional) Disable the builder interface for agents
-  #   disableBuilder: false
-  #   # (optional) Maximum total citations to include in agent responses, defaults to 30
-  #   maxCitations: 30
-  #   # (optional) Maximum citations per file to include in agent responses, defaults to 7
-  #   maxCitationsPerFile: 7
-  #   # (optional) Minimum relevance score for sources to be included in responses, defaults to 0.45 (45% relevance threshold)
-  #   # Set to 0.0 to show all sources (no filtering), or higher like 0.7 for stricter filtering
-  #   minRelevanceScore: 0.45
-  #   # (optional) Agent Capabilities available to all users. Omit the ones you wish to exclude. Defaults to list below.
-  #   capabilities: ["deferred_tools", "execute_code", "file_search", "actions", "tools"]
+  
+  agents:
+    # (optional) Default recursion depth for agents, defaults to 25
+    recursionLimit: 50
+    # (optional) Max recursion depth for agents, defaults to 25
+    maxRecursionLimit: 100
+    # (optional) Disable the builder interface for agents
+    disableBuilder: false
+    # (optional) Maximum total citations to include in agent responses, defaults to 30
+    maxCitations: 30
+    # (optional) Maximum citations per file to include in agent responses, defaults to 7
+    maxCitationsPerFile: 7
+    # (optional) Minimum relevance score for sources to be included in responses, defaults to 0.45 (45% relevance threshold)
+    # Set to 0.0 to show all sources (no filtering), or higher like 0.7 for stricter filtering
+    minRelevanceScore: 0.45
+    # (optional) Agent Capabilities available to all users. Omit the ones you wish to exclude. Defaults to list below.
+    capabilities: ["deferred_tools", "execute_code", "file_search", "actions", "tools"]
 
   # Anthropic endpoint configuration with Vertex AI support
   # Use this to run Anthropic Claude models through Google Cloud Vertex AI
@@ -465,30 +468,31 @@ endpoints:
   # bedrock:
   #   # Models Configuration
   #   # Specify which models are available (equivalent to BEDROCK_AWS_MODELS env variable)
-  #   models:
-  #     - "anthropic.claude-3-7-sonnet-20250219-v1:0"
-  #     - "anthropic.claude-3-5-sonnet-20241022-v2:0"
+  #   # models:
+  #   #   - "anthropic.claude-3-7-sonnet-20250219-v1:0"
+  #   #   - "anthropic.claude-3-5-sonnet-20241022-v2:0"
   #
   #   # Inference Profiles Configuration
   #   # Maps model IDs to their inference profile ARNs
   #   # IMPORTANT: The model ID (key) MUST be a valid AWS Bedrock model ID that you've added to the models list above
   #   # The ARN (value) is the inference profile you wish to map to for that model
   #   # Both the model ID and ARN are sent to AWS - the model ID for validation/metadata, the ARN for routing
-  #   inferenceProfiles:
-  #     "us.anthropic.claude-sonnet-4-20250514-v1:0": "${BEDROCK_INFERENCE_PROFILE_CLAUDE_SONNET}"
-  #     "anthropic.claude-3-7-sonnet-20250219-v1:0": "arn:aws:bedrock:us-west-2:123456789012:application-inference-profile/abc123"
+  #   # inferenceProfiles:
+  #   #   "us.anthropic.claude-sonnet-4-20250514-v1:0": "${BEDROCK_INFERENCE_PROFILE_CLAUDE_SONNET}"
+  #   #   "anthropic.claude-3-7-sonnet-20250219-v1:0": "arn:aws:bedrock:us-west-2:123456789012:application-inference-profile/abc123"
   #
   #   # Guardrail Configuration
-  #   guardrailConfig:
-  #     guardrailIdentifier: "your-guardrail-id"
-  #     guardrailVersion: "1"
+  #   # guardrailConfig:
+  #   #   guardrailIdentifier: "your-guardrail-id"
+  #   #   guardrailVersion: "1"
   #
   #     # Trace behavior for debugging (optional)
   #     # - "enabled": Include basic trace information about guardrail assessments
   #     # - "enabled_full": Include comprehensive trace details (recommended for debugging)
   #     # - "disabled": No trace information (default)
   #     # Trace output is logged to application log files for compliance auditing
-  #     trace: "enabled"
+  #     # trace: "enabled"
+
 # Example modelSpecs configuration showing grouping options
 # The 'group' field organizes model specs in the UI selector:
 # - If 'group' matches an endpoint name (e.g., "openAI", "groq"), the spec appears nested under that endpoint
@@ -589,9 +593,9 @@ endpoints:
 # # https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/assistants_endpoint
 
 # Web Search Configuration (optional)
-# webSearch:
-#  searchProvider: "searxng"
-#  searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
+webSearch:
+  searchProvider: "searxng"
+  searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
 # webSearch:
 #   # Jina Reranking Configuration
 #   jinaApiKey: '${JINA_API_KEY}'  # Your Jina API key
