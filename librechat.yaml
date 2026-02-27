@@ -111,6 +111,7 @@ interface:
   #   create: false
   #   share: false
   #   public: false
+  mcpServers: true 
   mcpServers:
   n8n-mcp:
     type: stdio
