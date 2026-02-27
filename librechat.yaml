@@ -589,9 +589,9 @@ endpoints:
 # # https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/assistants_endpoint
 
 # Web Search Configuration (optional)
-webSearch:
-  searchProvider: "searxng"
-  searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
+# webSearch:
+#  searchProvider: "searxng"
+#  searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
 # webSearch:
 #   # Jina Reranking Configuration
 #   jinaApiKey: '${JINA_API_KEY}'  # Your Jina API key
