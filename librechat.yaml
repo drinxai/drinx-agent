@@ -649,6 +649,7 @@ modelSpecs:
 
 # Web Search Configuration (optional)
 webSearch:
+  tavilyApiKey: '${TAVILY_API_KEY}'
   # Jina Reranking Configuration
   # jinaApiKey: '${JINA_API_KEY}'  # Your Jina API key
   # jinaApiUrl: '${JINA_API_URL}'  # Custom Jina API URL (optional, defaults to https://api.jina.ai/v1/rerank)
@@ -656,7 +657,6 @@ webSearch:
   # cohereApiKey: '${COHERE_API_KEY}'
   # Search providers
   # serperApiKey: '${SERPER_API_KEY}'
-  tavilyApiKey: '${TAVILY_API_KEY}'
   #searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
  #searxngApiKey: '${SEARXNG_API_KEY}'
   # Content scrapers
