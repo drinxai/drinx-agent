@@ -656,8 +656,9 @@ webSearch:
   # cohereApiKey: '${COHERE_API_KEY}'
   # Search providers
   # serperApiKey: '${SERPER_API_KEY}'
-  searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
-  searxngApiKey: '${SEARXNG_API_KEY}'
+  tavilyApiKey: '${TAVILY_API_KEY}'
+  #searxngInstanceUrl: '${SEARXNG_INSTANCE_URL}'
+ #searxngApiKey: '${SEARXNG_API_KEY}'
   # Content scrapers
   # firecrawlApiKey: '${FIRECRAWL_API_KEY}'
   # firecrawlApiUrl: '${FIRECRAWL_API_URL}'
